@@ -80,16 +80,9 @@ Settlement.ord = function (text) {
 	var str = text + "",
 		code = str.charCodeAt(0);
 	if (0xd800 <= code && code <= 0xdbff) {
-		// High surrogate
-		// (could change last hex to 0xDB7F to treat
-		//  high private surrogates as single characters)
 		var hi = code;
 		if (str.length === 1) {
-			// This is just a high surrogate with
-			// no following low surrogate, so we return its value.
 			return code;
-			// we could also throw an error as it is
-			// not a complete character, but someone may want to know.
 		}
 		var low = str.charCodeAt(1);
 		return (
@@ -99,12 +92,7 @@ Settlement.ord = function (text) {
 		);
 	}
 	if (0xdc00 <= code && code <= 0xdfff) {
-		// Low surrogate
-		// This is just a low surrogate with no preceding
-		// high surrogate, so we return its value;
 		return code;
-		// we could also throw an error as it is not a
-		// complete character, but someone may want to know
 	}
 	return code;
 };
@@ -128,12 +116,6 @@ Settlement.base_convert = function (
 Settlement.strtoupper = function (str) {
 	return (str + "").toUpperCase();
 };
-//---------------------------------
-// kalkicode.com
-// These methods have not been changed by our tools.
-// substr
-// charCodeAt
-//----------------------------
 
 function ConvertCRC16(str) {
 	function charCodeAt(str, i) {
